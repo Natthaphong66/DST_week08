@@ -1,6 +1,6 @@
 # DST Week 08 - PyCaret & MLflow
 ## fix wk08.html 
-[html/wk08.html](html/wk08.html)
+[html/wk_08.html](html/wk_08.html)
 แก้หน้าweb page ขาว: แก้ไขบรรทัดที่ 709 แก้ไขcurrentSide == 20 ตอนแรกแก้ไขเป็นcurrentSide == 28
 
 
