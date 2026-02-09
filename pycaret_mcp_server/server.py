@@ -6,26 +6,10 @@ from datetime import datetime
 from logging.handlers import RotatingFileHandler
 from typing import Optional
 
-# Handle both module execution and direct file execution
-try:
-    # When run as module: python -m pycaret_mcp_server.server
-    from .core.config import (
-        mcp, LOG_LEVEL, LOG_FILE, LOG_MAX_BYTES, LOG_BACKUP_COUNT
-    )
-    from .core.data_loader import load_data, get_data_summary
-    from .core import classification as clf
-    from .core import regression as reg
-except ImportError:
-    # When run directly: mcp dev pycaret_mcp_server/server.py
-    import sys
-    from pathlib import Path
-    sys.path.insert(0, str(Path(__file__).parent.parent))
-    from pycaret_mcp_server.core.config import (
-        mcp, LOG_LEVEL, LOG_FILE, LOG_MAX_BYTES, LOG_BACKUP_COUNT
-    )
-    from pycaret_mcp_server.core.data_loader import load_data, get_data_summary
-    from pycaret_mcp_server.core import classification as clf
-    from pycaret_mcp_server.core import regression as reg
+from core.config import mcp, LOG_LEVEL, LOG_FILE, LOG_MAX_BYTES, LOG_BACKUP_COUNT
+from core.data_loader import load_data, get_data_summary
+from core import classification as clf
+from core import regression as reg
 
 
 def setup_logging():

@@ -1,88 +1,85 @@
 # PyCaret MCP Server
-## 🚀 การติดตั้ง
+## 🛠️ Installation
 
+### Prerequisites
+- Python 3.10-3.12
+- uv package manager
+
+### Install Dependencies
 ```bash
-# ติดตั้ง dependencies
+cd /path/to/DST_week08
 uv sync
-
-# รัน server
-uv run python -m pycaret_mcp_server.server
 ```
 
-## 🛠️ MCP Tools ที่มี
+## 🚀 Usage
 
-### Data Loading
-| Tool | หน้าที่ |
-|------|--------|
-| `load_dataset_tool` | โหลดข้อมูล CSV/Excel |
-
-### Classification
-| Tool | หน้าที่ |
-|------|--------|
-| `setup_classification_tool` | ตั้งค่า classification experiment |
-| `compare_classification_models_tool` | เปรียบเทียบ models ทั้งหมด |
-| `create_classification_model_tool` | สร้าง model ที่เลือก |
-| `tune_classification_model_tool` | ปรับ hyperparameters |
-| `predict_classification_tool` | ทำนายข้อมูลใหม่ |
-| `save_classification_model_tool` | บันทึก model |
-
-### Regression
-| Tool | หน้าที่ |
-|------|--------|
-| `setup_regression_tool` | ตั้งค่า regression experiment |
-| `compare_regression_models_tool` | เปรียบเทียบ models ทั้งหมด |
-| `create_regression_model_tool` | สร้าง model ที่เลือก |
-| `tune_regression_model_tool` | ปรับ hyperparameters |
-| `predict_regression_tool` | ทำนายข้อมูลใหม่ |
-| `save_regression_model_tool` | บันทึก model |
-
-### Utility
-| Tool | หน้าที่ |
-|------|--------|
-| `get_available_models_tool` | แสดงรายชื่อ models ที่มี |
-
-## 🔧 การใช้งาน
-
-### 1. ทดสอบด้วย MCP Inspector
+### Run MCP Dev Server (Testing)
 ```bash
-uv run mcp dev pycaret_mcp_server/server.py
+cd pycaret_mcp_server
+uv run mcp dev server.py
 ```
-เปิด browser ที่ `http://localhost:5173`
+เปิด browser ไปที่ http://localhost:5173 เพื่อใช้ MCP Inspector
 
-### 2. ใช้กับ Claude Desktop
-เพิ่ม config ในไฟล์ `~/.config/Claude/claude_desktop_config.json`:
-
+### Claude Desktop Configuration
+เพิ่มใน `~/.config/Claude/claude_desktop_config.json`:
 ```json
 {
   "mcpServers": {
-    "pycaret": {
+    "pycaret-server": {
+      "type": "stdio",
       "command": "uv",
-      "args": ["run", "python", "-m", "pycaret_mcp_server.server"],
-      "cwd": "/path/to/DST_week08"
+      "args": ["run", "python", "/path/to/pycaret_mcp_server/server.py"],
+      "cwd": "/path/to/pycaret_mcp_server"
     }
   }
 }
 ```
 
-## 📁 โครงสร้างโปรเจกต์
+## 📚 MCP Tools
+
+### Data Loading
+| Tool | Description |
+|------|-------------|
+| `load_dataset_tool` | โหลด CSV/Excel และแสดง metadata |
+
+### Classification
+| Tool | Description |
+|------|-------------|
+| `setup_classification_tool` | ตั้งค่า classification experiment |
+| `compare_classification_models_tool` | เปรียบเทียบ models ทั้งหมด |
+| `create_classification_model_tool` | สร้าง model เฉพาะ (lr, rf, xgboost, etc.) |
+| `tune_classification_model_tool` | Tune hyperparameters |
+| `predict_classification_tool` | ทำนายด้วย model ที่ train แล้ว |
+| `save_classification_model_tool` | บันทึก model |
+
+### Regression
+| Tool | Description |
+|------|-------------|
+| `setup_regression_tool` | ตั้งค่า regression experiment |
+| `compare_regression_models_tool` | เปรียบเทียบ models ทั้งหมด |
+| `create_regression_model_tool` | สร้าง model เฉพาะ |
+| `tune_regression_model_tool` | Tune hyperparameters |
+| `predict_regression_tool` | ทำนายด้วย model ที่ train แล้ว |
+| `save_regression_model_tool` | บันทึก model |
+
+### Utility
+| Tool | Description |
+|------|-------------|
+| `get_available_models_tool` | แสดงรายการ models ที่ใช้ได้ |
+
+## 📁 Project Structure
 
 ```
 pycaret_mcp_server/
-├── __init__.py
-├── server.py              # Main MCP server
-├── README.md
-└── core/
-    ├── __init__.py
-    ├── config.py          # Configuration & FastMCP init
-    ├── data_loader.py     # Data loading utilities
-    ├── classification.py  # Classification functions
-    └── regression.py      # Regression functions
+├── server.py              # MCP server entry point
+├── core/
+│   ├── config.py          # Configuration & FastMCP init
+│   ├── data_loader.py     # Data loading utilities
+│   ├── classification.py  # Classification functions
+│   └── regression.py      # Regression functions
+└── logs/                  # Server logs
 ```
 
-## 📦 Dependencies
+## 📄 License
 
-- Python >=3.10, <3.13
-- PyCaret
-- FastMCP
-- chardet
-- psutil
+MIT License
