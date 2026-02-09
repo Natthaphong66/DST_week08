@@ -107,6 +107,7 @@ Thumbs.db
 # Logs
 *.log
 logs/
+pycaret_mcp_server/logs/
 
 # Temporary files
 *.tmp

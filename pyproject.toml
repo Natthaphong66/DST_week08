@@ -5,14 +5,21 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.10,<3.13"
 dependencies = [
+    "chardet>=5.0.0",
+    "fastmcp>=2.0.0",
     "ipykernel",
     "joblib<1.5",
     "jupyter",
     "matplotlib",
+    "mcp[cli]",
     "mlflow>=3.8.1",
     "numpy",
     "pandas<2.2.0",
+    "psutil",
     "pycaret>=3.1.0",
     "scikit-learn<1.5",
     "seaborn",
 ]
+
+[project.scripts]
+pycaret-mcp-server = "pycaret_mcp_server.server:main"
